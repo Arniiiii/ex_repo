@@ -1,0 +1,10 @@
+diff --git a/src/musikcube/musikcube.in b/src/musikcube/musikcube.in
+index 3148255..a0c5522 100644
+--- a/src/musikcube/musikcube.in
++++ b/src/musikcube/musikcube.in
+@@ -3,4 +3,4 @@
+ set -eu
+ 
+ cd "@musikcube_INSTALL_DIR@"/share/musikcube/
+-exec ./musikcube "$@"
++LD_PRELOAD="libtinfow.so.6" exec ./musikcube "$@"
