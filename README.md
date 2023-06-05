@@ -1,4 +1,4 @@
-#ex_repo
+# ex_repo
 
 Welcome! It's an overlay for gentoo.
 
