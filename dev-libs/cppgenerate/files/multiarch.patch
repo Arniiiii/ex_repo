@@ -1,0 +1,22 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 8aa0893..efd3e60 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -92,7 +92,7 @@ IF( UNIX )
+     # pkg-config information
+     #
+     SET(PKG_CONFIG_LIBDIR
+-        "\${prefix}/lib"
++        "\${prefix}/\${libdir}"
+     )
+     SET(PKG_CONFIG_INCLUDEDIR
+         "\${prefix}/include"
+@@ -118,7 +118,7 @@ IF( UNIX )
+     INSTALL( FILES 
+              "${CMAKE_BINARY_DIR}/cppgenerate.pc"
+              "${CMAKE_BINARY_DIR}/cppgenerate-static.pc"
+-             DESTINATION lib/pkgconfig)
++             DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
+ ENDIF( UNIX )
+ 
+ #
