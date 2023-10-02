@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person">
+    <name>Gerodote</name>
+  </maintainer>
+  <use>
+    <flag name="openmp">Enable the OpenMP execution space. Requires the compiler to support OpenMP (e.g., -fopenmp).</flag>
+    <flag name="cuda">Enable the CUDA execution space. Any Kokkos application compiled for CUDA embeds CUDA code via template metaprogramming. Thus, the whole application must be built with a CUDA-capable compiler. (At the moment, the only such compilers are NVIDIA’s NVCC and Clang 10.0+)</flag>
+    <flag name="threads">Enable the C++ Threads execution space. (aka multithread support)</flag>
+    <flag name="sycl">Enable the SYCL execution space. Requires a compiler capable of understanding SYCL.</flag>
+    <flag name="hip">Enable the HIP execution space. Requires a compiler capable of understanding HIP.</flag>
+    <flag name="serial">Enable the Serial execution space.(Single thread without parallelization support)</flag>
+  </use>
+  <upstream>
+	  <bugs-to>https://github.com/kokkos/kokkos/issues</bugs-to>
+	  <changelog>https://github.com/kokkos/kokkos/blob/master/CHANGELOG.md</changelog>
+    <doc>https://kokkos.github.io/kokkos-core-wiki/index.html</doc>
+  </upstream>
+</pkgmetadata>
+
