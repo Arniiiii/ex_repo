@@ -13,7 +13,3 @@ first of all, get a machine with gentoo. then:
 
 `emaint sync -r ex_repo`
 
-then try `emerge -av musikcube` or `equery u media-sound/musikcube::ex_repo`. ( It works, but in GURU better )
-
-also try `emerge -av dev-libs/dbus-cxx` and `emerge -av dev-libs/cppgenerate`
-
