@@ -2,8 +2,8 @@
 
 Welcome! It's an overlay for gentoo.
 
-# how to?
-first of all, get a machine with gentoo. then:
+# How to?
+First of all, get a machine with gentoo. Then:
 
 `emerge eselect-repository`
 
