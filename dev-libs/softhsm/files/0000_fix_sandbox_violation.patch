@@ -1,0 +1,10 @@
+diff --git a/src/lib/common/CMakeLists.txt b/src/lib/common/CMakeLists.txt
+index cb4de1a..0daec48 100644
+--- a/src/lib/common/CMakeLists.txt
++++ b/src/lib/common/CMakeLists.txt
+@@ -49,4 +49,4 @@ install(DIRECTORY DESTINATION ${CMAKE_INSTALL_LOCALSTATEDIR}/lib/softhsm/tokens)
+ 
+ install(CODE
+         "execute_process(
+-        COMMAND chmod 1777 ${CMAKE_INSTALL_LOCALSTATEDIR}/lib/softhsm/tokens)")
++        COMMAND chmod 1777 ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LOCALSTATEDIR}/lib/softhsm/tokens)")

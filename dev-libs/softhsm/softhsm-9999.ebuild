@@ -39,6 +39,10 @@ BDEPEND="
 	test? ( dev-util/cppunit )
 "
 
+PATCHES=(
+	"${FILESDIR}/0000_fix_sandbox_violation.patch"
+)
+
 src_configure() {
 	# Test failures with LTO (bug #867637)
 	append-flags -fno-strict-aliasing
