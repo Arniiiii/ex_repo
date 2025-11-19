@@ -56,6 +56,7 @@ src_configure() {
 		-DENABLE_STATIC=$(usex static)
 		-DWITH_CRYPTO_BACKEND='openssl'
 
+		# my default
 		--log-level=DEBUG
 		-DFETCHCONTENT_QUIET=OFF
 	)
@@ -71,4 +72,47 @@ src_install() {
 	cmake-multilib_src_install
 
 	keepdir /var/lib/softhsm/tokens
+}
+
+pkg_postinst() {
+	ewarn "I've got it, maybe you have got it during configuring of the project."
+	ewarn "Since IDK how to forward CMake's warning here, so here's just copy-paste"
+	ewarn ""
+	ewarn "======================================================================"
+	ewarn "SoftHSM has been configured to store sensitive data in non-page RAM"
+	ewarn "(i.e. memory that is not swapped out to disk). This is the default and"
+	ewarn "most secure configuration. Your system, however, is not configured to"
+	ewarn "support this model in non-privileged accounts (i.e. user accounts)."
+	ewarn ""
+	ewarn ""
+	ewarn ""
+	ewarn "You can check the setting on your system by running the following"
+	ewarn "command in a shell:"
+	ewarn ""
+	ewarn ""
+	ewarn ""
+	ewarn "        ulimit -l"
+	ewarn ""
+	ewarn ""
+	ewarn ""
+	ewarn "If this does not return \"unlimited\" and you plan to run SoftHSM from"
+	ewarn "non-privileged accounts then you should edit the configuration file"
+	ewarn "/etc/security/limits.conf (on most systems)."
+	ewarn ""
+	ewarn ""
+	ewarn ""
+	ewarn "You will need to add the following lines to this file:"
+	ewarn ""
+	ewarn ""
+	ewarn ""
+	ewarn "#<domain>       <type>          <item>          <value>"
+	ewarn "*               -               memlock         unlimited"
+	ewarn ""
+	ewarn ""
+	ewarn ""
+	ewarn "Alternatively, you can elect to disable this feature of SoftHSM by"
+	ewarn "re-running cmake with the option \"-DDISABLE_NON_PAGED_MEMORY=ON\"."
+	ewarn "Please be advised that this may seriously degrade the security of"
+	ewarn "SoftHSM."
+	ewarn "======================================================================"
 }
