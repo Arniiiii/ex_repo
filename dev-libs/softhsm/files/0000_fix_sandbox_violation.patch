@@ -1,8 +1,13 @@
 diff --git a/src/lib/common/CMakeLists.txt b/src/lib/common/CMakeLists.txt
-index cb4de1a..0daec48 100644
+index cb4de1a..2995cc9 100644
 --- a/src/lib/common/CMakeLists.txt
 +++ b/src/lib/common/CMakeLists.txt
-@@ -49,4 +49,4 @@ install(DIRECTORY DESTINATION ${CMAKE_INSTALL_LOCALSTATEDIR}/lib/softhsm/tokens)
+@@ -45,8 +45,8 @@ install(FILES ${PROJECT_BINARY_DIR}/man5/softhsm2.conf.5
+         DESTINATION ${CMAKE_INSTALL_MANDIR}/man5
+         )
+ 
+-install(DIRECTORY DESTINATION ${CMAKE_INSTALL_LOCALSTATEDIR}/lib/softhsm/tokens)
++install(DIRECTORY DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LOCALSTATEDIR}/lib/softhsm/tokens)
  
  install(CODE
          "execute_process(
