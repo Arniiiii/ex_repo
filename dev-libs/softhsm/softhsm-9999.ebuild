@@ -52,6 +52,7 @@ src_configure() {
 		-DENABLE_STATIC=$(usex static)
 		-DWITH_CRYPTO_BACKEND='openssl'
 
+		# my default
 		--log-level=DEBUG
 		-DFETCHCONTENT_QUIET=OFF
 	)
@@ -65,4 +66,6 @@ src_install() {
 	fi
 
 	cmake-multilib_src_install
+
+	keepdir /var/lib/softhsm/tokens
 }

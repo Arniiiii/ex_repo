@@ -65,4 +65,6 @@ src_install() {
 	fi
 
 	cmake-multilib_src_install
+
+	keepdir /var/lib/softhsm/tokens
 }
