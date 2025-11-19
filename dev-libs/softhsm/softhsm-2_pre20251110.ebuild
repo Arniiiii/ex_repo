@@ -19,7 +19,7 @@ DESCRIPTION="Software implementation of an HSM that supports PKCS 11 interface."
 HOMEPAGE="https://www.softhsm.org/"
 
 LICENSE="BSD-2"
-SLOT="0"
+SLOT="2"
 
 
 IUSE="p11-kit migration-tool test static doc"
