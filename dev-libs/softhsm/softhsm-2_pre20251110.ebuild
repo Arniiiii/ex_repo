@@ -6,9 +6,9 @@ EAPI=8
 inherit cmake-multilib
 
 if [[ ${PV} == *9999 ]]; then
-	inherit git-r3
 	EGIT_REPO_URI="https://github.com/softhsm/SoftHSMv2.git"
 	EGIT_BRANCH="develop"
+	inherit git-r3
 else
 	COMMIT="70c7d0f03db04a44ab3057350509fd4f31ffbd5b"
 	SRC_URI="https://github.com/softhsm/SoftHSMv2/archive/${COMMIT}.tar.gz -> ${P}.tar.gz"
