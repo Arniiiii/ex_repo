@@ -48,7 +48,8 @@ BDEPEND="
 # RESTRICT=""
 
 PATCHES=(
-	"${FILESDIR}/0009_fix_everything.patch"
+	"${FILESDIR}/0010_gentoo_specific_fix.patch"
+	"${FILESDIR}/0011_fix_erlang.patch"
 )
 
 src_configure() {
