@@ -1,5 +1,17 @@
+commit 3385efc8d63fefe701a114f4063a4d4dc6bfb596
+Author: Arniiiii <lg3dx6fd@gmail.com>
+Date:   Mon Dec 8 23:32:55 2025 +0000
+
+    Fix CMake's installation
+    
+    Fixed CMake's installation.
+    
+    Also introduced a test for finding installed corral.
+    
+    Added a pipeline in CI to test it.
+
 diff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml
-index bbc9054..c787304 100644
+index f9b84a0..f22f198 100644
 --- a/.github/workflows/ci.yml
 +++ b/.github/workflows/ci.yml
 @@ -2,7 +2,6 @@ name: Build and run tests
@@ -10,7 +22,7 @@ index bbc9054..c787304 100644
    pull_request:
  
  jobs:
-@@ -147,3 +146,23 @@ jobs:
+@@ -145,3 +144,23 @@ jobs:
        - name: Test
          run: cd ${{ github.workspace }}/build && env ${{ matrix.env }} ctest --output-on-failure
  
@@ -35,13 +47,12 @@ index bbc9054..c787304 100644
 +      - name: Test if usable
 +        run: cmake -S . -B ./build/to_try_use_installed -DCORRAL_TEST_INSTALLED_VERSION=1 -DCMAKE_PREFIX_PATH=./install_dir
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index ee06f66..2b1d4e5 100644
+index da5f7c5..95c276d 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -1,50 +1,39 @@
--cmake_minimum_required(VERSION 3.0)
+@@ -1,54 +1,39 @@
+ cmake_minimum_required(VERSION 3.15)
 -project(corral)
-+cmake_minimum_required(VERSION 3.10)
 +
 +set(THE_CORRAL_VERSION 1.0.0)
 +
@@ -73,6 +84,9 @@ index ee06f66..2b1d4e5 100644
 -add_library(
 -  corral
 -  INTERFACE
+-)
+-target_sources(corral
+-  INTERFACE
 -  corral/asio.h
 -  corral/CBPortal.h
 -  corral/Channel.h
@@ -89,6 +103,7 @@ index ee06f66..2b1d4e5 100644
 -  corral/Shared.h
 -  corral/Task.h
 -  corral/ThreadPool.h
+-  corral/DegenerateThreadPool.h
 -  corral/utility.h
 -  corral/Value.h
 -  corral/wait.h
@@ -117,9 +132,9 @@ index ee06f66..2b1d4e5 100644
 +                   $<INSTALL_INTERFACE:include>
 +)
  
- if(BUILD_TESTING)
- 
-@@ -142,12 +131,58 @@ endif()
+ option(SKIP_TESTS "Do not build corral unit tests.")
+ if(NOT ${SKIP_TESTS})
+@@ -159,12 +144,58 @@ endif()
  # Installation
  #
  
