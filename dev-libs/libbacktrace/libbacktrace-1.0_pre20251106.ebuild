@@ -8,7 +8,7 @@ inherit autotools multilib-minimal flag-o-matic
 DESCRIPTION="C library that may be linked into a C/C++ program to produce symbolic backtraces"
 HOMEPAGE="https://github.com/ianlancetaylor/libbacktrace"
 
-COMMITHASH="f1104f3270095831df536a2539f4cc408365105c"
+COMMITHASH="b9e40069c0b47a722286b94eb5231f7f05c08713"
 
 SRC_URI="https://github.com/ianlancetaylor/libbacktrace/archive/${COMMITHASH}.tar.gz -> ${P}.tar.gz"
 
