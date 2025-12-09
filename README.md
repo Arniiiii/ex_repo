@@ -13,3 +13,9 @@ First of all, get a machine with gentoo. Then:
 
 `emaint sync -r ex_repo`
 
+
+# Notes
+
+Previously existed packages:
+
+* `dev-util/cmake-format` : removed because unmaintained and `neocmakelsp` works better.
