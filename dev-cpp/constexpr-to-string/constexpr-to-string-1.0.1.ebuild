@@ -26,28 +26,10 @@ KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~loong ~m68k ~mips ~ppc ~ppc64 ~riscv 
 
 # PROPERTIES=""
 
-DEPEND="
-	dev-libs/boost
-	dev-libs/openssl:0/3
-"
+DEPEND=""
 
 RDEPEND="${DEPEND}"
 
 BDEPEND="
-dev-cmake/cpm-cmake
 dev-build/cmake
 "
-
-PATCHES=(
-	"${FILESDIR}/0001_constexpr-to-string_fix_finding_package_project.patch"
-)
-
-src_configure() {
-	local mycmakeargs=(
-		-DCPM_LOCAL_PACKAGES_ONLY=1
-		-DCPM_DOWNLOAD_ALL=0
-		-DCPM_USE_LOCAL_PACKAGES=0
-		-DCPM_DOWNLOAD_LOCATION="${BROOT}/usr/share/cmake/CPM.cmake"
-	)
-	cmake_src_configure
-}
