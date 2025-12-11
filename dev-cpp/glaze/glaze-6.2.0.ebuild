@@ -3,6 +3,7 @@
 
 EAPI=8
 
+# header-only
 inherit cmake
 
 DESCRIPTION="Extremely fast, in memory, JSON and interface library for modern C++ "
@@ -49,7 +50,7 @@ BDEPEND="
 
 PATCHES=(
 	"${FILESDIR}/0010_gentoo_specific_fix.patch"
-	"${FILESDIR}/0011_fix_erlang.patch"
+	# "${FILESDIR}/0011_fix_erlang.patch"
 )
 
 src_configure() {
