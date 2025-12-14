@@ -46,10 +46,6 @@ BDEPEND="
 
 # RESTRICT=""
 
-PATCHES=(
- "${FILESDIR}/0004_fix_install.patch"
-)
-
 src_configure() {
 	local mycmakeargs=(
 		-DCMAKE_SKIP_INSTALL_RULES=OFF

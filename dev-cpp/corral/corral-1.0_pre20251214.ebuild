@@ -8,7 +8,7 @@ inherit cmake
 DESCRIPTION="Lightweight structured concurrency for C++20"
 HOMEPAGE="https://github.com/hudson-trading/corral"
 
-CORRAL_COMMIT="8d1a087f5e560633bcbce93cdae7bff06bf85ca4"
+CORRAL_COMMIT="3505402a3a8ae4ad02e9661889178cbec523210d"
 
 SRC_URI="https://github.com/hudson-trading/corral/archive/${CORRAL_COMMIT}.tar.gz -> ${P}.tar.gz"
 
@@ -48,10 +48,6 @@ BDEPEND="
 "
 
 # RESTRICT=""
-
-PATCHES=(
- "${FILESDIR}/0004_fix_install.patch"
-)
 
 src_configure() {
 	local mycmakeargs=(
