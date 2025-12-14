@@ -54,9 +54,11 @@ src_configure() {
 	local mycmakeargs=(
 		-DCMAKE_SKIP_INSTALL_RULES=OFF
 		-DBUILD_TESTING=$(usex test ON OFF)
+		-DSKIP_TESTS=$(usex test OFF ON)
 		-DCORRAL_CATCH2=""
 		-DCORRAL_BOOST="a" # here can be anything not same as ".*://.*"
 		-DCORRAL_EXAMPLES=$(usex examples ON OFF)
+		-DSKIP_EXAMPLES=$(usex examples OFF ON)
 
 		-DCPM_DOWNLOAD_LOCATION=${BROOT}/usr/share/cmake/CPM.cmake
 		-DCPM_LOCAL_PACKAGES_ONLY=1
