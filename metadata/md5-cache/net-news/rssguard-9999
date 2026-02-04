@@ -1,0 +1,17 @@
+BDEPEND=dev-qt/qttools:6[linguist] app-alternatives/ninja >=dev-build/cmake-3.28.5 >=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=compile configure install postinst postrm preinst prepare test unpack
+DEPEND=dev-qt/qtbase:6[concurrent,dbus,gui,mysql?,network,sql,sqlite?,ssl,widgets] dev-qt/qtdeclarative:6 dev-qt/qtmultimedia:6[gstreamer] dev-qt/qt5compat:6 media-libs/libglvnd virtual/zlib:= libmpv? ( dev-qt/qtbase:6[opengl] media-video/mpv:= ) qtmultimedia? ( dev-qt/qtbase:6[opengl] dev-qt/qtmultimedia:6 ) webengine? ( dev-qt/qtwebengine:6[widgets(+)] )
+DESCRIPTION=Simple (yet powerful) news feed reader
+EAPI=8
+HOMEPAGE=https://github.com/martinrotter/rssguard/
+IDEPEND=dev-util/desktop-file-utils x11-misc/shared-mime-info
+INHERIT=cmake optfeature xdg git-r3
+IUSE=libmpv mysql qtmultimedia +sqlite webengine
+KEYWORDS=amd64
+LICENSE=|| ( LGPL-3 GPL-2+ ) AGPL-3+ BSD GPL-3+ MIT
+PROPERTIES=live
+RDEPEND=dev-qt/qtbase:6[concurrent,dbus,gui,mysql?,network,sql,sqlite?,ssl,widgets] dev-qt/qtdeclarative:6 dev-qt/qtmultimedia:6[gstreamer] dev-qt/qt5compat:6 media-libs/libglvnd virtual/zlib:= libmpv? ( dev-qt/qtbase:6[opengl] media-video/mpv:= ) qtmultimedia? ( dev-qt/qtbase:6[opengl] dev-qt/qtmultimedia:6 ) webengine? ( dev-qt/qtwebengine:6[widgets(+)] )
+REQUIRED_USE=|| ( mysql sqlite ) ?? ( libmpv qtmultimedia )
+SLOT=0
+_eclasses_=toolchain-funcs	30214924c0c3b92ec7dbf24fc70d60d3	flag-o-matic	a7afe42e95fb46ce9691605acfb24672	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	3a59a39e97af0f7c03f49cf3c22f262b	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	cmake	5691a3da96eac88f135cf3596b8c2c3c	optfeature	538bce96e5589935b57e178e8635f301	xdg	3ef49a87c52c8b77c476351195dfe575	git-r3	875eb471682d3e1f18da124be97dcc81
+_md5_=8e510721f88f4a0b2979fdaca7c6aac2
