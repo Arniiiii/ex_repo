@@ -18,7 +18,7 @@ RESTRICT="!test? ( test )"
 DEPEND="dev-libs/boost:="
 
 BDEPEND="
-	test? ( <dev-cpp/catch-3:0 )
+	test? ( >=dev-cpp/catch-3:0 )
 "
 
 PATCHES=(
