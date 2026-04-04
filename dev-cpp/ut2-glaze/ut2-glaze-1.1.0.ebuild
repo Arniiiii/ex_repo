@@ -34,9 +34,7 @@ dev-build/cmake
 "
 
 PATCHES=(
-	"${FILESDIR}/0000_make_testing_optional.patch"
-	"${FILESDIR}/0001_change_project_name_to_ut2-glaze.patch"
-	"${FILESDIR}/0002_fix_installing.patch"
+	"${FILESDIR}/0003_rename_and_fix_installing.patch"
 )
 
 src_configure() {

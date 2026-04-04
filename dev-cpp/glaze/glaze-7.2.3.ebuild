@@ -35,7 +35,7 @@ DEPEND="
 	)
 	test? (
 		dev-cpp/ut2-glaze
-		dev-cpp/asio
+		dev-cpp/boost
 		>=dev-cpp/eigen-3.4
 	)
 "
@@ -49,7 +49,7 @@ BDEPEND="
 # RESTRICT=""
 
 PATCHES=(
-	"${FILESDIR}/0010_gentoo_specific_fix.patch"
+	"${FILESDIR}/0011_rename_ut_to_ut2-glaze.patch"
 )
 
 src_configure() {

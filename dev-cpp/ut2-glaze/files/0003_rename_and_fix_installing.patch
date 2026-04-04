@@ -8,6 +8,30 @@ index efe9691..864767c 100644
  .DS_Store
 +
 +./cmake/install-config.cmake
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index ec7cfcd..a7f1102 100755
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.24)
+ include(cmake/prelude.cmake)
+ 
+ project(
+-    ut
++    ut2-glaze
+     VERSION 1.1.0
+     LANGUAGES CXX
+ )
+@@ -35,6 +35,7 @@ if(NOT CMAKE_SKIP_INSTALL_RULES)
+   include(cmake/install-rules.cmake)
+ endif()
+ 
+-if (PROJECT_IS_TOP_LEVEL)
++if (PROJECT_IS_TOP_LEVEL AND BUILD_TESTING)
++  enable_testing()
+   include(cmake/dev-mode.cmake)
+-endif()
+\ No newline at end of file
++endif()
 diff --git a/cmake/install-config.cmake b/cmake/install-config.cmake
 deleted file mode 100644
 index e9af6c2..0000000
@@ -36,3 +60,4 @@ index 261fa29..2e7a398 100644
  install(
      FILES cmake/install-config.cmake
      DESTINATION "${zb8_INSTALL_CMAKEDIR}"
+
