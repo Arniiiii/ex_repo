@@ -21,7 +21,9 @@ S="${WORKDIR}/m.css-${M_CSS_COMMIT}"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
-RDEPEND="dev-lang/python"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+RDEPEND="${PYTHON_DEPS}"
+
 
 BDEPEND="
 	dev-build/cmake

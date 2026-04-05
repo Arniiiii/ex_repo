@@ -17,7 +17,7 @@ S="${WORKDIR}/ut-${PV}"
 LICENSE="Boost-1.0"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="test -test-valgrind -benchmarks -examples -doc -experimental-c++-modules"
+IUSE="-test-valgrind -benchmarks -examples -doc -experimental-c++-modules test "
 
 REQUIRED_USE="!test? ( !test-valgrind )"
 

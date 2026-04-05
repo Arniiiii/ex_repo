@@ -23,7 +23,7 @@ RESTRICT="!test? ( test )"
 BDEPEND="
 	test? (
 		app-arch/xz-utils
-		sys-libs/zlib
+		virtual/zlib
 	)
 "
 

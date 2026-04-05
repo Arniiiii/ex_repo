@@ -9,9 +9,6 @@
 	<longdescription>
 		Amazing script for installing your projects in CMake! Creates CMake install config files only
 	</longdescription>
-	<use>
-		<flag name="doc">Install related README.md</flag>
-	</use>
 	<upstream>
 		<remote-id type="github">Arniiiii/PackageProject.cmake</remote-id>
 	</upstream>

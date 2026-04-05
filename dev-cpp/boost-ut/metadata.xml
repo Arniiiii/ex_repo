@@ -1,27 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-	<maintainer type="person" proxied="proxy">
-		<email>lg3dx6fd@gmail.com</email>
-		<name>Arniiiii</name>
-		<description>Just a guy that likes C++ and uses CMake.</description>
-	</maintainer>
-	<longdescription>
-		C++ single header/single module, macro-free μ(micro)/Unit Testing Framework. It is faster in most benchmarks than any other C++ unit testing framework. 
-		*DISCLAIMER* UT is not an official Boost library.
-		*DISCLAIMER* Distinguish ut and ut2 ( in gentoo here boost-ut and ut2-glaze (that is a fork of ut2) ): ut2 is intendent to be more compile-time testing framework, while ut:
-		  1. Developed first
-		  2. Didn't have compile-time stuff in mind (but maybe works)
-		  3. Though has version 2.3.1 (or whatever is now)
-	</longdescription>
-	<use>
-		<flag name="test-valgrind">Run tests with valgrind</flag>
-		<flag name="examples">Build examples</flag>
-		<flag name="benchmarks">Build benchmarks</flag>
-		<flag name="doc">Install README.md.bz2</flag>
-		<flag name="experimental-c++-modules">EXPERIMANTAL Try to enable C++ modules target.</flag>
-	</use>
-	<upstream>
-		<remote-id type="github">boost-ext/ut</remote-id>
-	</upstream>
+  <maintainer proxied="proxy" type="person">
+    <email>lg3dx6fd@gmail.com</email>
+    <name>Arniiiii</name>
+    <description>Just a guy that likes C++ and uses CMake.</description>
+  </maintainer>
+  <longdescription>C++ single header/single module, macro-free μ(micro)/Unit Testing Framework. It is faster in most benchmarks than any other C++ unit testing framework. *DISCLAIMER* UT is not an official Boost library. *DISCLAIMER* Distinguish ut and ut2 ( in gentoo here boost-ut and ut2-glaze (that is a fork of ut2) ): ut2 is intendent to be more compile-time testing framework, while ut: 1. Developed first 2. Didn't have compile-time stuff in mind (but maybe works) 3. Though has version 2.3.1 (or whatever is now)</longdescription>
+  <use>
+    <flag name="test-valgrind">Run tests with valgrind</flag>
+    <flag name="examples">Build examples</flag>
+    <flag name="benchmarks">Build benchmarks</flag>
+    <flag name="doc">Install README.md.bz2</flag>
+    <flag name="experimental-c++-modules">EXPERIMANTAL Try to enable C++ modules target.</flag>
+  </use>
+  <upstream>
+    <remote-id type="github">boost-ext/ut</remote-id>
+  </upstream>
 </pkgmetadata>

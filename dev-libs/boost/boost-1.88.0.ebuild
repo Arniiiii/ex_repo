@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{10..13} )
+PYTHON_COMPAT=( python3_{10..14} )
 
 inherit cmake-multilib python-r1
 
@@ -137,7 +137,7 @@ RESTRICT="test"
 DEPEND="
 	boost-locale-icu? ( dev-libs/icu:=[${MULTILIB_USEDEP}] )
 	boost-locale-iconv? ( virtual/libiconv[${MULTILIB_USEDEP}] )
-	boost-iostream-zlib? ( sys-libs/zlib:=[${MULTILIB_USEDEP}] )
+	boost-iostream-zlib? ( virtual/zlib:=[${MULTILIB_USEDEP}] )
 	boost-iostream-bzip2? ( app-arch/bzip2:=[${MULTILIB_USEDEP}] )
 	boost-iostream-lzma? ( app-arch/xz-utils:=[${MULTILIB_USEDEP}] )
 	boost-iostream-zstd? ( app-arch/zstd:=[${MULTILIB_USEDEP}] )

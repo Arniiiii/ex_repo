@@ -5,7 +5,7 @@ EAPI=8
 
 inherit cmake
 
-DESCRIPTION="Professionally written C++ function traits library (single header-only) for retrieving info about any function (arg types, arg count, return type, etc.)"
+DESCRIPTION="Professionally written C++ function traits library"
 HOMEPAGE="https://github.com/HexadigmSystems/FunctionTraits"
 
 COMMIT="d4a6f8a96df2d8174219dc0a73f0201193b3c538"
