@@ -10,7 +10,6 @@ EGIT_REPO_URI="https://github.com/ianlancetaylor/libbacktrace.git"
 EGIT_BRANCH="master"
 inherit git-r3 autotools multilib-minimal flag-o-matic
 
-
 LICENSE="BSD"
 SLOT="0"
 IUSE="static-libs test"

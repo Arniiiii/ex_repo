@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{10..13} )
+PYTHON_COMPAT=(python3_{10..14})
 
 # it's just a CMake script that installs another CMake script to
 # folder with CMake utility modules (usually /usr/share/cmake/m.css/ ), thus not cmake-multilib.
@@ -23,7 +23,6 @@ SLOT="0"
 KEYWORDS="~amd64"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 RDEPEND="${PYTHON_DEPS}"
-
 
 BDEPEND="
 	dev-build/cmake
