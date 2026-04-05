@@ -1,6 +1,6 @@
 BDEPEND=app-alternatives/ninja >=dev-build/cmake-3.28.5
 DEFINED_PHASES=compile configure install prepare test
-DEPEND=eetf-format? ( dev-lang/erlang ) test? ( dev-cpp/ut2-glaze dev-cpp/boost >=dev-cpp/eigen-3.4 )
+DEPEND=eetf-format? ( dev-lang/erlang ) test? ( dev-cpp/ut2-glaze dev-libs/boost >=dev-cpp/eigen-3.4 )
 DESCRIPTION=Extremely fast, in memory, JSON and interface library for modern C++
 EAPI=8
 HOMEPAGE=https://github.com/stephenberry/glaze
@@ -8,9 +8,9 @@ INHERIT=cmake
 IUSE=eetf-format test fuzzing examples
 KEYWORDS=~amd64
 LICENSE=MIT
-RDEPEND=eetf-format? ( dev-lang/erlang ) test? ( dev-cpp/ut2-glaze dev-cpp/boost >=dev-cpp/eigen-3.4 )
+RDEPEND=eetf-format? ( dev-lang/erlang ) test? ( dev-cpp/ut2-glaze dev-libs/boost >=dev-cpp/eigen-3.4 )
 RESTRICT=!test? ( test )
 SLOT=0
 SRC_URI=https://github.com/stephenberry/glaze/archive/refs/tags/v7.2.3.tar.gz -> glaze-7.2.3.tar.gz
 _eclasses_=toolchain-funcs	5195689ff6a73b0e789acfa09d4fbcb9	flag-o-matic	fd3558f73f6503093adee69adf41020d	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	d063ea1900a793f93eb095010d6d9156	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	cmake	3395ce6618fc5c7af03335471b896644
-_md5_=d49d49e755c4f11c5c27d546435ada34
+_md5_=04fff45aa6a6878eece2331a223249e2

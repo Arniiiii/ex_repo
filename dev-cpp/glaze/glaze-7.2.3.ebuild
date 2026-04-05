@@ -23,7 +23,7 @@ DEPEND="
 	)
 	test? (
 		dev-cpp/ut2-glaze
-		dev-cpp/boost
+		dev-libs/boost
 		>=dev-cpp/eigen-3.4
 	)
 "
