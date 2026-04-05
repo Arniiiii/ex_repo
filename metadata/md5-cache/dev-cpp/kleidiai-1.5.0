@@ -1,4 +1,4 @@
-BDEPEND=clang-tidy? ( llvm-core/clang[extra] ) app-alternatives/ninja >=dev-build/cmake-3.20.5
+BDEPEND=clang-tidy? ( llvm-core/clang[extra] ) app-alternatives/ninja >=dev-build/cmake-3.28.5
 DEFINED_PHASES=compile configure install prepare test
 DEPEND=test? ( >=dev-cpp/gtest-1.14.0 ) benchmark? ( >=dev-cpp/benchmark-1.8.4 )
 DESCRIPTION=Computational micro-kernels for Arm® CPUs. AI-related.
@@ -12,5 +12,5 @@ RDEPEND=test? ( >=dev-cpp/gtest-1.14.0 ) benchmark? ( >=dev-cpp/benchmark-1.8.4 
 RESTRICT=!test? ( test )
 SLOT=0
 SRC_URI=https://gitlab.arm.com/kleidi/kleidiai/-/archive/v1.5.0/kleidiai-v1.5.0.tar.bz2
-_eclasses_=toolchain-funcs	a0b29008c671a362b505f96fa80ce9c0	flag-o-matic	a7afe42e95fb46ce9691605acfb24672	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	cmake	460729dc36f68cf03b044bc1d367e34a	out-of-source-utils	dbf9e34ee8964084651e25907fa8f52c	multibuild	4650a65187015567b4e041bb9bfdb364	multilib	b2a329026f2e404e9e371097dda47f96	multilib-build	9ac26ea006828266d235e2f0135429b5	multilib-minimal	e9f54d75b074edc47d36994bbc1e2123	cmake-multilib	37d23064f303dcf23453353ab8c77059
+_eclasses_=toolchain-funcs	5195689ff6a73b0e789acfa09d4fbcb9	flag-o-matic	fd3558f73f6503093adee69adf41020d	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	d063ea1900a793f93eb095010d6d9156	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	cmake	3395ce6618fc5c7af03335471b896644	out-of-source-utils	8e5093bd27b7f541a1913271f25d633a	multibuild	83db098a835f71feb71761f72a694aa2	multilib	404b65bd5212cff83b3935c685419d08	multilib-build	d7802b3638ffc661375c0021cdd19efd	multilib-minimal	e9f54d75b074edc47d36994bbc1e2123	cmake-multilib	3f19d8d5fccba52076cdeb2281ad349f
 _md5_=f602475b11d0c2273f94f8bb1c406bc7

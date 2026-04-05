@@ -1,4 +1,4 @@
-BDEPEND=dev-build/cmake app-alternatives/ninja >=dev-build/cmake-3.20.5
+BDEPEND=dev-build/cmake app-alternatives/ninja >=dev-build/cmake-3.28.5
 DEFINED_PHASES=compile configure install postinst prepare setup test
 DESCRIPTION=m.css with patch to allow `find_package` from CMake via '${m.css_SOURCE_DIR}'
 EAPI=8
@@ -10,5 +10,5 @@ LICENSE=MIT
 RDEPEND=dev-lang/python
 SLOT=0
 SRC_URI=https://github.com/mosra/m.css/archive/0a460a7a9973a41db48f735e7b49e4da9a876325.tar.gz -> m-css-1.0_pre20250615.tar.gz
-_eclasses_=toolchain-funcs	a0b29008c671a362b505f96fa80ce9c0	flag-o-matic	a7afe42e95fb46ce9691605acfb24672	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	cmake	460729dc36f68cf03b044bc1d367e34a	python-utils-r1	8a006695bc0db22490452dd06914dda5	python-single-r1	47d8ac9be330c9366112b78fd4f8ce57
+_eclasses_=toolchain-funcs	5195689ff6a73b0e789acfa09d4fbcb9	flag-o-matic	fd3558f73f6503093adee69adf41020d	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	d063ea1900a793f93eb095010d6d9156	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	cmake	3395ce6618fc5c7af03335471b896644	eapi9-pipestatus	d2c134036ac31c3085aebc9147f572bd	python-utils-r1	9c4180f103a0e8340bc993fc85dbdadd	python-single-r1	47d8ac9be330c9366112b78fd4f8ce57
 _md5_=bc83a22683bfdd4816d3c12c5b324872

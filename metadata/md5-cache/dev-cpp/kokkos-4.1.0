@@ -1,4 +1,4 @@
-BDEPEND=app-alternatives/ninja >=dev-build/cmake-3.20.5
+BDEPEND=app-alternatives/ninja >=dev-build/cmake-3.28.5
 DEFINED_PHASES=compile configure install prepare pretend setup test
 DEPEND=sys-apps/hwloc:= openmp? ( || ( sys-devel/gcc[openmp] llvm-core/clang ) ) cuda? ( || ( dev-util/nvidia-cuda-toolkit >=llvm-core/clang-10 ) ) hip? ( dev-util/hip ) sycl? ( || ( dev-cpp/tbb dev-cpp/adaptivecpp ) )
 DESCRIPTION=C++ Performance Portability Programming EcoSystem
@@ -13,5 +13,5 @@ REQUIRED_USE=openmp? ( !threads ) threads? ( !openmp )
 RESTRICT=!test? ( test )
 SLOT=0
 SRC_URI=https://github.com/kokkos/kokkos/archive/refs/tags/4.1.00.tar.gz -> kokkos-4.1.0.tar.gz
-_eclasses_=toolchain-funcs	a0b29008c671a362b505f96fa80ce9c0	flag-o-matic	a7afe42e95fb46ce9691605acfb24672	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	cmake	460729dc36f68cf03b044bc1d367e34a
+_eclasses_=toolchain-funcs	5195689ff6a73b0e789acfa09d4fbcb9	flag-o-matic	fd3558f73f6503093adee69adf41020d	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	d063ea1900a793f93eb095010d6d9156	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	cmake	3395ce6618fc5c7af03335471b896644
 _md5_=053da02b1faa4a65b123b6147be3829e
