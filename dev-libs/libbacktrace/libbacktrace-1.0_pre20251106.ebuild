@@ -16,7 +16,7 @@ S="${WORKDIR}/${PN}-${COMMITHASH}"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~loong ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86 ~amd64-linux ~x86-linux ~arm64-macos ~ppc-macos ~x64-macos ~x64-solaris"
+KEYWORDS="~amd64"
 IUSE="static-libs test"
 RESTRICT="!test? ( test )"
 
@@ -34,7 +34,6 @@ src_prepare() {
 }
 
 multilib_src_configure() {
-
 	# tests are failing with LTO.
 	# https://github.com/ianlancetaylor/libbacktrace/issues/152
 	filter-lto

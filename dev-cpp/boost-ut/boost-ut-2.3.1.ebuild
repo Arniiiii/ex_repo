@@ -3,7 +3,6 @@
 
 EAPI=8
 
-# it's a header-only lib, thus not cmake-multilib. However, examples and tests...
 inherit cmake
 
 DESCRIPTION="C++20 μ(micro)/Unit Testing framework "
@@ -17,16 +16,12 @@ S="${WORKDIR}/ut-${PV}"
 
 LICENSE="Boost-1.0"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~loong ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86 ~amd64-linux ~x86-linux ~arm64-macos ~ppc-macos ~x64-macos ~x64-solaris"
+KEYWORDS="~amd64"
 IUSE="test -test-valgrind -benchmarks -examples -doc -experimental-c++-modules"
 
 REQUIRED_USE="!test? ( !test-valgrind )"
 
 RESTRICT="!test? ( test )"
-
-# PROPERTIES=""
-
-# DEPEND=""
 
 RDEPEND="${DEPEND}"
 

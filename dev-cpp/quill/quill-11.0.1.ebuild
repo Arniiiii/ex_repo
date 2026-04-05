@@ -14,15 +14,12 @@ S="${WORKDIR}/quill-a29940ebe1122556fa6d99be1929264469d6ec99"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~loong ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86 ~amd64-linux ~x86-linux ~arm64-macos ~ppc-macos ~x64-macos ~x64-solaris"
+KEYWORDS="~amd64"
 IUSE="examples test	extensive-test benchmarks valgrind doc"
 
 REQUIRED_USE="extensive-test? ( test ) doc? ( examples ) "
 
 RESTRICT="!test? ( test )"
-
-# # it has libfmt bundled in a good way. It doesn't seem to have other dependencies.
-# DEPEND=""
 
 RDEPEND="
 valgrind? ( dev-debug/valgrind )
@@ -43,7 +40,7 @@ PATCHES=(
 )
 
 src_configure() {
-		# Gentoo users enable ccache via e.g. FEATURES=ccache or
+	# Gentoo users enable ccache via e.g. FEATURES=ccache or
 	# other means. We don't want the build system to enable it for us.
 	sed -i -e '/find_program(CCACHE_FOUND ccache)/d' CMakeLists.txt || die
 

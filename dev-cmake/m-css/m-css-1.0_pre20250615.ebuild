@@ -20,18 +20,8 @@ S="${WORKDIR}/m.css-${M_CSS_COMMIT}"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~loong ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86 ~amd64-linux ~x86-linux ~arm64-macos ~ppc-macos ~x64-macos ~x64-solaris"
-# IUSE="doc"
-
-# REQUIRED_USE=""
-
-# RESTRICT=""
-
-# PROPERTIES=""
-
-# DEPEND=""
-
-RDEPEND="${DEPEND} dev-lang/python"
+KEYWORDS="~amd64"
+RDEPEND="dev-lang/python"
 
 BDEPEND="
 	dev-build/cmake
@@ -46,14 +36,6 @@ src_configure() {
 	)
 
 	cmake_src_configure
-}
-
-src_install() {
-	# if use doc; then
-	# 	einstalldocs
-	# fi
-
-	cmake_src_install
 }
 
 pkg_postinst() {

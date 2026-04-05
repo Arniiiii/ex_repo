@@ -13,24 +13,17 @@ S="${WORKDIR}/PackageProject.cmake-${PV}"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~loong ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86 ~amd64-linux ~x86-linux ~arm64-macos ~ppc-macos ~x64-macos ~x64-solaris"
-IUSE="doc test"
-
-# REQUIRED_USE=""
-
-# DEPEND=""
-
-# RDEPEND="${DEPEND}"
+KEYWORDS="~amd64"
+IUSE="test"
 
 RESTRICT="!test? ( test )"
 
 BDEPEND="
-	dev-build/cmake
 	test? ( dev-cmake/cpm-cmake dev-libs/libfmt )
 "
 
 src_configure() {
-		# Gentoo users enable ccache via e.g. FEATURES=ccache or
+	# Gentoo users enable ccache via e.g. FEATURES=ccache or
 	# other means. We don't want the build system to enable it for us.
 	sed -i -e '/find_program(CCACHE_FOUND ccache)/d' CMakeLists.txt || die
 
@@ -67,10 +60,6 @@ src_test() {
 }
 
 src_install() {
-	if use doc; then
-		einstalldocs
-	fi
-
 	CMAKE_USE_DIR=${S} BUILD_DIR=${S}_build
 	cmake_src_install
 }
