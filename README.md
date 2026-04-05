@@ -1,9 +1,11 @@
 # ex_repo
 
-Welcome! It's an overlay for gentoo.
+It's an overlay for Gentoo. I mean, some recipes of how to build some applications or libraries using a Linux distro called Gentoo.
 
-# How to?
-First of all, get a machine with gentoo. Then:
+Mostly C++ related recipes.
+
+# How to use it?
+First, get a machine with Gentoo. Then:
 
 `emerge eselect-repository`
 
@@ -16,6 +18,8 @@ First of all, get a machine with gentoo. Then:
 
 # Notes
 
-Previously existed packages:
+## Previously existed packages:
 
 * `dev-util/cmake-format` : removed because unmaintained and `neocmakelsp` works better.
+* `kleidiai` and `llama-cpp` since I do not use them and were somewhat unmaintained.
+
