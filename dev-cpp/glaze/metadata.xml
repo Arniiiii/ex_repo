@@ -10,7 +10,7 @@
 			Yet another library for C++ for parsing JSON . Uses SIMD as well. In some benchmarks is better than simdjson.
 	</longdescription>
 	<use>
-		<flag name="eetf-format">Link Erlang for erlang ettf format (and enable corresponsing tests)</flag>
+		<flag name="eetf-format">Support for ettf</flag>
 		<flag name="fuzzing">Build fuzzers (not install)</flag>
 		<flag name="doc">Install README files</flag>
 		<flag name="examples">Build examples (not install)</flag>
