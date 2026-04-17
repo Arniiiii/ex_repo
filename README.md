@@ -22,4 +22,4 @@ First, get a machine with Gentoo. Then:
 
 * `dev-util/cmake-format` : removed because unmaintained and `neocmakelsp` works better.
 * `kleidiai` and `llama-cpp` since I do not use them and were somewhat unmaintained.
-
+- `dev-libs/softhsm` I do not maintain it nowadays
