@@ -13,7 +13,7 @@ S="${WORKDIR}/glaze-${PV}"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="eetf-format test fuzzing examples"
 RESTRICT="!test? ( test )"
 
@@ -30,7 +30,7 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 PATCHES=(
-	"${FILESDIR}/${P}-unbundle-test-deps.patch"
+	"${FILESDIR}/glaze-7.2.3-unbundle-test-deps.patch"
 )
 
 src_configure() {
@@ -49,7 +49,6 @@ src_configure() {
 src_test() {
 	local CMAKE_SKIP_TESTS=(
 		cli_menu_test        # it is not a test: it is an interactive CLI program.
-		http_client_ssl_test # https://github.com/stephenberry/glaze/issues/2438
 	)
 
 	cmake_src_test
