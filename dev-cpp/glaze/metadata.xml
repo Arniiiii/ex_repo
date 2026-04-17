@@ -12,7 +12,6 @@
 	<use>
 		<flag name="eetf-format">Support for ettf</flag>
 		<flag name="fuzzing">Build fuzzers (not install)</flag>
-		<flag name="doc">Install README files</flag>
 		<flag name="examples">Build examples (not install)</flag>
 	</use>
 	<upstream>
