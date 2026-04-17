@@ -22,7 +22,7 @@ BDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}/0000_make_use_of_catch2_ver_3.patch"
+	"${FILESDIR}/0001_make_use_of_catch2_ver_3.patch"
 )
 
 src_configure() {
@@ -44,4 +44,3 @@ src_compile() {
 	fi
 
 }
-

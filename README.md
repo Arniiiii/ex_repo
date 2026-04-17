@@ -1,10 +1,11 @@
 # ex_repo
 
-It's an overlay for Gentoo. I mean, some recipes of how to build some applications or libraries using a Linux distro called Gentoo.
+It's an overlay for Gentoo. I mean, some recipes of how to build some applications or libraries using a Linux distro called Gentoo and its package manager Portage.
 
 Mostly C++ related recipes.
 
 # How to use it?
+
 First, get a machine with Gentoo. Then:
 
 `emerge eselect-repository`
@@ -15,11 +16,26 @@ First, get a machine with Gentoo. Then:
 
 `emaint sync -r ex_repo`
 
-
 # Notes
 
 ## Previously existed packages:
 
-* `dev-util/cmake-format` : removed because unmaintained and `neocmakelsp` works better.
-* `kleidiai` and `llama-cpp` since I do not use them and were somewhat unmaintained.
+- `dev-util/cmake-format` : removed because unmaintained and `neocmakelsp` works better.
+- `kleidiai` and `llama-cpp` since I do not use them and were somewhat unmaintained.
 - `dev-libs/softhsm` I do not maintain it nowadays
+- `rssguard-9999` no need
+- `games-action/prismlauncher-cracked` it is possible to use `-9999` version and fix URL or repo, I guess
+- `tmux-9999`. Patch is already in master
+
+# TODO
+
+## Add
+
+- [ ] `dev-cpp/inja` Why does it exist in `conan` but not in Gentoo ?
+- [ ] `dev-cpp/adaptivecpp` at least for CPU, Nvidia GPU at if possible with Intel iGPU support. I can't write for AMD GPU since I do not have one to test it.
+
+## Update
+
+- [ ] `kokkos` update right after `adaptivecpp` one
+- [ ] `bazel`
+- [ ] `boost` (CMake). It is too big of a project to test it and send patches... Forever in `**`.

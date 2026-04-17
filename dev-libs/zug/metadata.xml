@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer proxied="proxy" type="person">
+    <email>lg3dx6fd@gmail.com</email>
+    <name>Arniiiii</name>
+  </maintainer>
+  <upstream>
+    <remote-id type="github">arximboldi/zug</remote-id>
+  </upstream>
+</pkgmetadata>
