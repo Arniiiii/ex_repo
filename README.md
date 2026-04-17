@@ -39,3 +39,9 @@ First, get a machine with Gentoo. Then:
 - [ ] `kokkos` update right after `adaptivecpp` one
 - [ ] `bazel`
 - [ ] `boost` (CMake). It is too big of a project to test it and send patches... Forever in `**`.
+
+## Improve
+
+- [ ] CI
+    - Maybe copy main part from `::p4public` ? 
+- [ ] Automatic pull of RSS feeds of releases/commits and try to do pull-requests with CI enabled
