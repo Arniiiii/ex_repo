@@ -1,4 +1,4 @@
-# Copyright 2025 Arniiiii lg3dx6fd@gmail.com
+# Copyright 2026 Arniiiii lg3dx6fd@gmail.com
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
