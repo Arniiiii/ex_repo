@@ -17,6 +17,6 @@
     <remote-id type="github">kokkos/kokkos</remote-id>
     <bugs-to>https://github.com/kokkos/kokkos/issues</bugs-to>
     <changelog>https://github.com/kokkos/kokkos/blob/master/CHANGELOG.md</changelog>
-    <doc>https://kokkos.github.io/kokkos-core-wiki/index.html</doc>
+    <doc>https://kokkos.org/kokkos-core-wiki/index.html</doc>
   </upstream>
 </pkgmetadata>

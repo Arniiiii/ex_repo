@@ -1,0 +1,11 @@
+BDEPEND=dev-build/cmake
+DEFINED_PHASES=install postinst prepare
+DESCRIPTION=A CMake's NOT package manager. A tool for bundling dependencies in CMake
+EAPI=8
+HOMEPAGE=https://github.com/Arniiiii/CPM.cmake
+IUSE=doc
+KEYWORDS=~amd64
+LICENSE=MIT
+SLOT=0
+SRC_URI=https://github.com/Arniiiii/CPM.cmake/archive/4d245d2e584298071e5f7723fc8fc6f02f79f9b5.tar.gz -> cpm-cmake-1_p20250121.tar.gz
+_md5_=bb4151618e530c39c9804b43211dcf17

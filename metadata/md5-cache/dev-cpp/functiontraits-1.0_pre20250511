@@ -8,5 +8,5 @@ KEYWORDS=~amd64
 LICENSE=Hexadigm_Generic_C++_library
 SLOT=0
 SRC_URI=https://github.com/HexadigmSystems/FunctionTraits/archive/d4a6f8a96df2d8174219dc0a73f0201193b3c538.tar.gz -> functiontraits-1.0_pre20250511.tar.gz
-_eclasses_=toolchain-funcs	5195689ff6a73b0e789acfa09d4fbcb9	flag-o-matic	fd3558f73f6503093adee69adf41020d	multiprocessing	45d0620f25c2f063ad6276ecd9ed9399	ninja-utils	d063ea1900a793f93eb095010d6d9156	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	cmake	3395ce6618fc5c7af03335471b896644
+_eclasses_=toolchain-funcs	58a918e3a42d0156f010dcfd43725be5	flag-o-matic	fd3558f73f6503093adee69adf41020d	multiprocessing	45d0620f25c2f063ad6276ecd9ed9399	ninja-utils	d063ea1900a793f93eb095010d6d9156	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	cmake	3395ce6618fc5c7af03335471b896644
 _md5_=947d7339a8154a64f62eb9088597e9af
