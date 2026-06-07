@@ -34,6 +34,7 @@ First, get a machine with Gentoo. Then:
 - [ ] `dev-cpp/sqlpp23`
 - [ ] `dev-cpp/inja` Why does it exist in `conan` but not in Gentoo ?
 - [ ] `dev-cpp/adaptivecpp` at least for CPU, Nvidia GPU at if possible with Intel iGPU support. I can't write for AMD GPU since I do not have one to test it.
+- [ ] `dev-cpp/reflex` . It requires full write of its CMakeLists.txt, almost from the ground up...
 
 ## Update
 
