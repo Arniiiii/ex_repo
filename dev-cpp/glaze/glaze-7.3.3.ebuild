@@ -3,6 +3,7 @@
 
 EAPI=8
 
+# it's a header-only lib, thus not cmake-multilib. However, examples, tests and benchmarks...
 inherit cmake
 
 DESCRIPTION="Extremely fast, in memory, JSON and interface library for modern C++ "
