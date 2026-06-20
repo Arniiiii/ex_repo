@@ -1,0 +1,434 @@
+diff --git a/Makefile.in b/Makefile.in
+index f69982c8..3a7a7df9 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -97,11 +97,11 @@ MODEL=@W3M_TARGET@-@W3M_LANG@
+ SRCS=main.c file.c buffer.c display.c etc.c search.c linein.c table.c local.c \
+ 	form.c map.c frame.c rc.c menu.c mailcap.c image.c \
+ 	symbol.c entity.c terms.c url.c ftp.c mimehead.c regex.c news.c \
+-	func.c cookie.c history.c backend.c util.c $(KEYBIND_SRC)
++	func.c cookie.c history.c backend.c util.c hint.c $(KEYBIND_SRC)
+ OBJS=main.o file.o buffer.o display.o etc.o search.o linein.o table.o local.o\
+ 	form.o map.o frame.o rc.o menu.o mailcap.o image.o \
+ 	symbol.o entity.o terms.o url.o ftp.o mimehead.o regex.o news.o \
+-	func.o cookie.o history.o backend.o util.o $(KEYBIND_OBJ)
++	func.o cookie.o history.o backend.o util.o hint.o $(KEYBIND_OBJ)
+ LSRCS=anchor.c parsetagx.c tagtable.c istream.c
+ LOBJS=anchor.o parsetagx.o tagtable.o istream.o
+ ALIBOBJS=Str.o indep.o regex.o textlist.o parsetag.o myctype.o hash.o
+@@ -127,7 +127,7 @@ HELP_TARGET=w3mhelp.html
+ HELP_ALLFILES=w3mhelp-w3m_en.html w3mhelp-w3m_ja.html \
+ 	w3mhelp-lynx_en.html w3mhelp-lynx_ja.html
+ 
+-DEFUNS=$(top_srcdir)/main.c $(top_srcdir)/menu.c
++DEFUNS=$(top_srcdir)/main.c $(top_srcdir)/menu.c $(top_srcdir)/hint.c
+ SCRIPTSUBDIRS= scripts
+ SUBDIRS = $(SCRIPTSUBDIRS) w3mimg libwc po
+ .PHONY: $(SUBDIRS)
+diff --git a/fm.h b/fm.h
+index 1c45cbcd..9006a11c 100644
+--- a/fm.h
++++ b/fm.h
+@@ -200,6 +200,9 @@ typedef struct _DownloadList {
+ #define TMPF_HIST	5
+ #define MAX_TMPF_TYPE	6
+ 
++
++#define DEFAULT_LINK_KEYMAP "abcdefghijklmnopqrstuvwxyz"
++
+ /* 
+  * Globals.
+  */
+@@ -450,6 +453,7 @@ enum {
+ };
+ global int DefaultURLString init(DEFAULT_URL_CURRENT);
+ global int MarkAllPages init(FALSE);
++global char *linkKeymap init(DEFAULT_LINK_KEYMAP);
+ 
+ #ifdef USE_MIGEMO
+ global int use_migemo init(FALSE);
+diff --git a/hint.c b/hint.c
+new file mode 100644
+index 00000000..37ec712b
+--- /dev/null
++++ b/hint.c
+@@ -0,0 +1,326 @@
++#include "fm.h"
++#include "indep.h"
++#include "linein.h"
++#include "proto.h"
++
++#define mvaddnstr(y, x, str, n) (move(y, x), addnstr_sup(str, n))
++
++#define HINT_CANCEL  -2
++#define HINT_INVALID -1
++
++#define HINT_DEFAULT 0
++#define HINT_FORM 1
++#define HINT_HREF 2
++#define HINT_IMG  3
++
++void
++initLinkKeymap(void)
++{
++    char c;
++    int i, j, error = 0;
++    int max_len = 32;  /* maximum keymap size */
++
++    if (! non_null(linkKeymap)) {
++	linkKeymap = DEFAULT_LINK_KEYMAP;
++	return;
++    }
++    if (strlen(linkKeymap) > max_len) {
++	disp_err_message(_(Sprintf("link keymap exceedes %d characters",
++			max_len)->ptr), FALSE);
++	linkKeymap = DEFAULT_LINK_KEYMAP;
++	return;
++    }
++
++    for (i = 0; i < (strlen(linkKeymap) - 1); i++) {
++	c = linkKeymap[i];
++	if (IS_SPACE(c) || !IS_ALNUM(c)) {
++	    disp_err_message(_(Sprintf("link keymap invalid character: '%c'",
++			    linkKeymap[i])->ptr), FALSE);
++	    error = 1;
++	}
++	for (j = i; j < (strlen(linkKeymap) - 1); j++) {
++	    if (c == linkKeymap[j+1]) {
++		disp_err_message(_(Sprintf("link keymap duplicate character: '%c'",
++				linkKeymap[i])->ptr), FALSE);
++	    error = 1;
++	    }
++	}
++    }
++    if (error)
++	linkKeymap = DEFAULT_LINK_KEYMAP;
++}
++
++/* columns used by line numbering in current buffer */
++static int
++lineNumberOffset()
++{
++    int n, offset = 0;
++
++    n = Currentbuf->lastLine->linenumber;
++    while (n != 0) {
++	offset++;
++	n /= 10;
++    }
++    if (offset < 5)
++	offset = 5;
++    else
++	offset = offset + 1;
++    return offset;
++}
++
++/* number representation for key string */
++static int
++intFromKeyStr(Str key, char *keymap)
++{
++    int i, pow, index, result;
++    int base = strlen(keymap);
++
++    if (key == NULL || key->length == 0)
++	return HINT_INVALID;
++
++    for (i = 0, result = 0, pow = 1; i < key->length; i++, pow *= base) {
++	index = 0;
++	while (keymap[index] != key->ptr[key->length - 1 - i])
++	    index++;
++	result += index * pow;
++    }
++    /* one-indexed */
++    return result + 1;
++}
++
++/* key string representation for number */
++static Str
++keyStrFromInt(int number, char *keymap)
++{
++    Str key;
++    int length, pow, map_index, i, base = strlen(keymap);
++    int max_len = 4;  /* label character limit */
++
++    number = abs(number);
++
++    if (base < 2)
++	return Strnew_charp(" ");
++
++    for (length = 1, pow = base; pow <= number; length++)
++	    pow *= base;
++
++    if (length > max_len)
++	return Strnew_charp(" ");
++
++    key = Strnew_size(length);
++    key->ptr[length] = '\0';
++    for (i = 1; i <= length; i++) {
++	map_index = number % base;
++	key->ptr[length - i] = keymap[map_index];
++	number /= base;
++    }
++    return key;
++}
++
++/* find one target hyperlink in view, or find all links and draw labels */
++static int
++findLink(int list, int target)
++{
++    AnchorList *al;
++    Anchor *an;
++    ParsedURL pu;
++    int i, x, y, cursorX, cursorY, anchorX, anchorY;
++    int startLine, endLine, startCol, endCol, posDelta;
++    int currentLine = 0, cursorXOffset = 0, showLineOffset = 0, total = 0;
++
++    /*  find any anchorlist or a specific type */
++    if (list == HINT_DEFAULT) {
++	if (!(al = Currentbuf->href) &&
++		!(al = Currentbuf->img) &&
++		!(al = Currentbuf->formitem))
++	    return 0;
++    } else if (list == HINT_FORM) {
++	if (!(al = Currentbuf->formitem))
++	    return 0;
++    } else if (list == HINT_HREF) {
++	if (!(al = Currentbuf->href))
++	    return 0;
++    } else if (list == HINT_IMG) {
++	if (!(al = Currentbuf->img))
++	    return 0;
++    } else {
++	return 0;
++    }
++
++    cursorX = Currentbuf->cursorX;
++    cursorY = Currentbuf->cursorY;
++    startLine = Currentbuf->topLine->linenumber;
++    startCol = Currentbuf->currentColumn;
++    /* exclude lastline */
++    endLine = Currentbuf->topLine->linenumber + Currentbuf->LINES - 1;
++    endCol = Currentbuf->currentColumn + Currentbuf->COLS - 1;
++
++    /* add number column width to anchor position */
++    if (showLineNum)
++	showLineOffset = lineNumberOffset();
++
++    standout();
++    for (i = 0; i < al->nanchor; i++) {
++	an = &al->anchors[i];
++
++	if (an->hseq < 0)
++	    continue;
++	y = an->start.line;
++	x = an->start.pos;
++
++	/* remaining anchors not within view */
++	if (y > endLine)
++	    break;
++
++	/* reset cursor pos offset for each line */
++	if (currentLine != y) {
++	    currentLine = y;
++	    cursorXOffset = 0;
++	}
++	/* anchor is in currently in view, calculate start position */
++	if (y >= startLine && y <= endLine && x >= startCol && x <= endCol ) {
++	    total++;
++
++	    /* subract 1, keymap is zero-indexed */
++	    Str label = Sprintf("%s", keyStrFromInt(total - 1, linkKeymap)->ptr);
++
++	    /* subtract value of previous lines/columns to get view */
++	    anchorX = x + showLineOffset - startCol;
++	    anchorY = y - startLine;
++
++	    /* cursor used to measure diff for real and visual anchor pos */
++	    cursorXY(Currentbuf,  (x - startCol) - cursorXOffset, anchorY);
++	    posDelta = (Currentbuf->pos - startCol) - Currentbuf->visualpos;
++
++	    /* diff for real and visual pos increased between last anchor */
++	    if (posDelta > cursorXOffset)
++		cursorXOffset = posDelta;
++
++	    /* draw anchor label */
++	    if (!target)
++		mvaddnstr(anchorY, anchorX - cursorXOffset, label->ptr, label->length);
++	    else if (target == total) {
++		parseURL2(an->url, &pu, baseURL(Currentbuf));
++		set_environ("W3M_HINT_LINK", parsedURL2Str(&pu)->ptr);
++		break;
++	    }
++	}
++
++    }
++    standend();
++    /* restore original position after drawing */
++    if (!target)
++	cursorXY(Currentbuf, cursorX, cursorY);
++    return total;
++}
++
++static int
++selectLink(char *input)
++{
++    int i;
++
++    /* handle escape sequence and empty return */
++    if (! non_null(input))
++	return HINT_CANCEL;
++    /* exclude input containing whitespace */
++    for (i = 0; i < strlen(input); i++)
++	    if (IS_SPACE(input[i]) && !IS_ENDL(input[i]))
++		return HINT_INVALID;
++
++    return intFromKeyStr(Strnew_charp(input), linkKeymap);
++}
++
++int
++hint(int list ,char *prompt)
++{
++    int total, link;
++
++    set_environ("W3M_HINT_LINK", "");
++    total = findLink(list, FALSE);
++    if (!total)
++	return 0;
++
++    /* prompt while selection invalid or greater than number of links */
++    link = HINT_INVALID;
++    while(link == HINT_INVALID || link > total) {
++	link = selectLink(inputStr(prompt, ""));
++	if (link > total)
++	    disp_message_nsec(_("target link not in range"), FALSE, 1, TRUE, FALSE);
++    }
++    /* clear labels */
++    reshape();
++    if (link == HINT_CANCEL)
++	return 0;
++    return findLink(list, link);
++}
++
++DEFUN(showANum, SHOW_LINK_NUM, "Show target link address")
++{
++    char *prompt, *url;
++    int x, y;
++
++    x = Currentbuf->cursorX;
++    y = Currentbuf->cursorY;
++    prompt = "Show link URL: ";
++    hint(HINT_HREF, prompt);
++    url = getenv("W3M_HINT_LINK");
++    if (non_null(url))
++	disp_message_nomouse(url, TRUE);
++    cursorXY(Currentbuf, x, y);
++}
++
++DEFUN(followANum, GOTO_LINK_NUM, "Follow target hyperlink")
++{
++    char *prompt;
++
++    prompt = "Goto link: ";
++    if (hint(HINT_DEFAULT, prompt))
++	followA();
++}
++
++DEFUN(tabANum, TAB_LINK_NUM, "Follow target hyperlink in a new tab")
++{
++    char *prompt;
++
++    prompt = "Tab goto link: ";
++    if (hint(HINT_DEFAULT, prompt))
++	tabA();
++}
++
++DEFUN(menuANum, MENU_LINK_NUM, "Pop up menu on target hyperlink")
++{
++    char *prompt, *menu;
++
++    menu = CurrentCmdData;
++    if (non_null(menu))
++	prompt = Sprintf("Open menu %s on link: ", menu)->ptr;
++    else
++	prompt = "Open menu on link: ";
++
++    if (hint(HINT_DEFAULT, prompt))
++	mainMn();
++}
++
++DEFUN(movANum, MOVE_LINK_NUM, "Move to target hyperlink")
++{
++    char *prompt;
++
++    prompt = "Move to link: ";
++    hint(HINT_DEFAULT, prompt);
++}
++
++DEFUN(movINum, MOVE_IMG_NUM, "Move to target image")
++{
++    char *prompt;
++
++    prompt = "Move to image: ";
++    hint(HINT_IMG, prompt);
++}
++
++DEFUN(movFNum, MOVE_FORM_NUM, "Move to target form")
++{
++    char *prompt;
++
++    prompt = "Move to form: ";
++    hint(HINT_FORM, prompt);
++}
+diff --git a/proto.h b/proto.h
+index 5cae422e..0414dca6 100644
+--- a/proto.h
++++ b/proto.h
+@@ -60,6 +60,13 @@ extern void topA(void);
+ extern void lastA(void);
+ extern void nthA(void);
+ extern void onA(void);
++extern void followANum(void);
++extern void showANum(void);
++extern void tabANum(void);
++extern void menuANum(void);
++extern void movANum(void);
++extern void movFNum(void);
++extern void movINum(void);
+ 
+ extern void nextA(void);
+ extern void prevA(void);
+@@ -681,4 +688,5 @@ extern void dispVer(void);
+ extern Str base64_encode(const char *src, size_t len);
+ 
+ extern void userMessage(void);
++extern void initLinkKeymap(void);
+ #endif
+diff --git a/rc.c b/rc.c
+index 55d9f203..1cc00699 100644
+--- a/rc.c
++++ b/rc.c
+@@ -85,6 +85,7 @@ static int OptionEncode = FALSE;
+ #define CMT_DISPLINK     N_("Display link URL automatically")
+ #define CMT_DISPLINKNUMBER N_("Display link numbers")
+ #define CMT_ZEROBASEDLINKNO N_("Use 0 as first link number")
++#define CMT_LINKKEYMAP  N_("Character set used to display link hint labels")
+ #define CMT_DECODE_URL   N_("Display decoded URL")
+ #define CMT_DISPLINEINFO N_("Display current line information")
+ #define CMT_DISP_COLUMN_NUMBER N_("Display column number in line information")
+@@ -802,6 +803,8 @@ struct param_ptr params10[] = {
+ struct param_ptr params11[] = {	/* experimental */
+     {"zero_based_link_no", P_INT, PI_ONOFF, (void *)&zeroBasedLinkNo,
+      CMT_ZEROBASEDLINKNO, NULL},
++    {"link_keymap", P_STRING, PI_TEXT, (void *)&linkKeymap,
++     CMT_LINKKEYMAP, NULL},
+     {NULL, 0, 0, NULL, NULL, NULL}
+ };
+ 
+@@ -1374,6 +1377,7 @@ sync_with_option(void)
+ #endif
+     if (fmInitialized) {
+ 	initKeymap(FALSE);
++	initLinkKeymap();
+ #ifdef USE_MOUSE
+ 	initMouseAction();
+ #endif				/* MOUSE */

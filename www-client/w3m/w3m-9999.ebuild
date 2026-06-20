@@ -50,6 +50,7 @@ BDEPEND="
 PATCHES=(
 	"${FILESDIR}"/${PN}-0.5.3_p20210102-restore-gettext-macro.patch
 	"${FILESDIR}"/${PN}-0.5.3_p20210102-fix-configure-gettext.patch
+	"${FILESDIR}"/${PN}-9999-hints.patch
 )
 
 src_prepare() {
