@@ -10,6 +10,6 @@ HOMEPAGE="https://www.genivia.com/doc/reflex/html/"
 SRC_URI="https://github.com/Genivia/RE-flex/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
 S="${WORKDIR}/RE-flex-${PV}"
 
-LICENSE="BSD-3"
+LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64"
