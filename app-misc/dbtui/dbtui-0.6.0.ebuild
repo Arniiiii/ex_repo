@@ -415,6 +415,7 @@ inherit cargo
 DESCRIPTION="Terminal database client with Vim-style navigation"
 HOMEPAGE="https://github.com/Di3go0-0/dbtui"
 SRC_URI="
+	https://github.com/Di3go0-0/dbtui/archive/refs/tags/v${PV}.tar.gz
 	${CARGO_CRATE_URIS}
 "
 
